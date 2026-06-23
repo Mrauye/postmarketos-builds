@@ -38,6 +38,10 @@ jobs:
           git fetch pipa $DEFAULT_BRANCH
           git reset --hard pipa/$DEFAULT_BRANCH
 
+      - name: Build required package
+        run: |
+          pmbootstrap build abuild
+
       - name: Build the xiaomi-pipa with KDE Plasma Desktop
         run: |
           cp xiaomi-pipa.cfg ~/.config/pmbootstrap_v3.cfg
@@ -56,7 +60,7 @@ jobs:
 
       - name: Copy xiaomi-pipa kernel
         run: |
-          rm -r out/*
+          rm -rf out/*
           cp ~/.local/var/pmbootstrap/packages/edge/aarch64/linux-postmarketos-qcom-sm8250-pipa-*.apk out/
 
       - name: Upload artifacts xiaomi-pipa kernel
