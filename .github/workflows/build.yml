@@ -38,15 +38,15 @@ jobs:
           git fetch pipa $DEFAULT_BRANCH
           git reset --hard pipa/$DEFAULT_BRANCH
 
-      - name: Build required package
+      - name: Build abuild first
         run: |
-          pmbootstrap build abuild
+          pmbootstrap build abuild --lax
 
       - name: Build the xiaomi-pipa with KDE Plasma Desktop
         run: |
           cp xiaomi-pipa.cfg ~/.config/pmbootstrap_v3.cfg
           yes | pmbootstrap zap
-          pmbootstrap install --password 147147 --add postmarketos-ui-plasma-desktop --strict=no
+          pmbootstrap install --password 147147 --add postmarketos-ui-plasma-desktop
           pmbootstrap export
           cp /tmp/postmarketOS-export/boot.img out/boot-xiaomi-pipa.img
           cp /tmp/postmarketOS-export/xiaomi-pipa.img out/rootfs-xiaomi-pipa-plasma.img
