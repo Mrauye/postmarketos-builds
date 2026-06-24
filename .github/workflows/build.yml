@@ -38,6 +38,10 @@ jobs:
           git fetch pipa $DEFAULT_BRANCH
           git reset --hard pipa/$DEFAULT_BRANCH
 
+      - name: Update local pmaports clone
+        run: |
+          pmbootstrap pull
+
       - name: Build abuild first
         run: |
           pmbootstrap build abuild --lax
